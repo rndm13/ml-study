@@ -20,6 +20,7 @@ X = df.drop(columns=['sepal width (cm)', 'target'])
 print(f"Size of dataset: {df.shape}")
 print(f"Target stats:\n{y.describe()}")
 print(f"Skipped rows: {df.isnull().sum().sum()}")
+print(f"Duplicate rows: {df.duplicated().sum()}")
 
 # TRAIN TEST SPLIT 80:20
 X_train, X_test, y_train, y_test = train_test_split(

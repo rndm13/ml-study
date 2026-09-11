@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split, KFold, cross_val_score
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, PolynomialFeatures
 from sklearn.dummy import DummyRegressor
-from sklearn.linear_model import LinearRegression, Ridge
+from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 # LOAD
@@ -43,17 +43,10 @@ poly2_model = Pipeline([
     ("model", LinearRegression())
 ])
 
-# Candidate 3: Ridge Regression (L2-регуляризація)
-ridge_model = Pipeline([
-    ("scaler", StandardScaler()),
-    ("model", Ridge(alpha=1.0))
-])
-
 models = {
     "Baseline": baseline,
     "Linear": linear_model,
-    "Polynomial (d=2)": poly2_model,
-    "Ridge (L2)": ridge_model
+    "Polynomial (d=2)": poly2_model
 }
 
 # K-FOLD CROSS-VALIDATION (k = 5)

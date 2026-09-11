@@ -2,10 +2,11 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.compose import ColumnTransformer
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split, KFold, cross_val_score
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler, PolynomialFeatures
+from sklearn.preprocessing import StandardScaler, PolynomialFeatures, OneHotEncoder
 from sklearn.dummy import DummyRegressor
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
@@ -16,6 +17,19 @@ df = iris.frame
 
 y = df['sepal width (cm)']
 X = df.drop(columns=['sepal width (cm)', 'target'])
+X['species'] = df['target'].map({0: 'setosa', 1: 'versicolor', 2: 'virginica'})
+
+num_features = ['sepal length (cm)', 'petal length (cm)', 'petal width (cm)']
+cat_features = ['species']
+
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', StandardScaler(), num_features),
+        ('cat', OneHotEncoder(drop='first', sparse_output=False), cat_features)
+    ]
+)
+
+preprocessor.fit(X)
 
 print(f"Size of dataset: {df.shape}")
 print(f"Target stats:\n{y.describe()}")
@@ -27,17 +41,25 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
+feature_names = preprocessor.get_feature_names_out()
+
+print("Names after encoding:")
+for name in feature_names:
+    print(f"- {name}")
+
 # CANDIDATE MODELS
 baseline = DummyRegressor(strategy="mean")
 
 # Candidate 1: Linear Regression
 linear_model = Pipeline([
+    ("prep", preprocessor),
     ("scaler", StandardScaler()),
     ("model", LinearRegression())
 ])
 
 # Candidate 2: Polynomial Regression (degree=2)
 poly2_model = Pipeline([
+    ("prep", preprocessor),
     ("scaler", StandardScaler()),
     ("poly", PolynomialFeatures(degree=2, include_bias=False)),
     ("model", LinearRegression())

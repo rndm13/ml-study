@@ -1,0 +1,19 @@
+{
+  "rows": 606,
+  "features": 100,
+  "target": "class",
+  "target_classes": {
+    "0": "Valley",
+    "1": "Hill"
+  },
+  "missing_values_total": 0,
+  "duplicate_rows": 0,
+  "class_counts": {
+    "Valley": 305,
+    "Hill": 301
+  },
+  "class_share": {
+    "Valley": 0.5033,
+    "Hill": 0.4967
+  }
+}

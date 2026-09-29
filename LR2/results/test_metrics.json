@@ -1,0 +1,35 @@
+{
+  "selected_model": "Logistic Regression",
+  "test_metrics": {
+    "Accuracy": 0.7213114754098361,
+    "Precision": 0.6451612903225806,
+    "Recall": 0.9836065573770492,
+    "F1": 0.7792207792207793,
+    "ROC-AUC": 0.9610319806503628
+  },
+  "baseline_test_metrics": {
+    "Accuracy": 0.5,
+    "Precision": 0.0,
+    "Recall": 0.0,
+    "F1": 0.0,
+    "ROC-AUC": 0.5
+  },
+  "train_shape": [
+    484,
+    100
+  ],
+  "test_shape": [
+    122,
+    100
+  ],
+  "train_class_counts": {
+    "0": 244,
+    "1": 240
+  },
+  "test_class_counts": {
+    "0": 61,
+    "1": 61
+  },
+  "random_state": 42,
+  "test_size": 0.2
+}

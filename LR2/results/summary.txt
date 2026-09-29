@@ -1,0 +1,22 @@
+Hill-Valley — classification experiment
+
+Selected model: Logistic Regression
+Train shape: (484, 100)
+Test shape: (122, 100)
+
+Test metrics:
+  Accuracy: 0.7213
+  Precision: 0.6452
+  Recall: 0.9836
+  F1: 0.7792
+  ROC-AUC: 0.9610
+
+Confusion matrix: TN=28, FP=33, FN=1, TP=60
+Misclassified objects: 34
+Near threshold (|p-0.5| <= 0.05): 33
+High-confidence errors: 0
+
+Thresholds 0.3 / 0.5 / 0.7:
+  t=0.3: Precision=0.5259, Recall=1.0000, F1=0.6893, FP=55, FN=0
+  t=0.5: Precision=0.6452, Recall=0.9836, F1=0.7792, FP=33, FN=1
+  t=0.7: Precision=1.0000, Recall=0.1475, F1=0.2571, FP=0, FN=52

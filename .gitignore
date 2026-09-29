@@ -1,3 +1,7 @@
 .venv
 *.png
 !.gitignore
+
+__pycache__
+*.data
+*.zip

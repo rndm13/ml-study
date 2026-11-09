@@ -1,0 +1,50 @@
+{
+  "name": "batch_quality_priority",
+  "description": "Навчальний пакетний сценарій із вищою вагою ROC-AUC та якості прогнозу.",
+  "constraints": {
+    "cv_f1_mean": {
+      "min": 0.3
+    },
+    "cv_recall_mean": {
+      "min": 0.3
+    },
+    "latency_p95_ms": {
+      "max": 100.0
+    },
+    "model_size_mb": {
+      "max": 10.0
+    }
+  },
+  "criteria": {
+    "cv_roc_auc_mean": {
+      "direction": "maximize",
+      "weight": 0.45,
+      "worst": 0.5,
+      "best": 0.95
+    },
+    "cv_f1_mean": {
+      "direction": "maximize",
+      "weight": 0.3,
+      "worst": 0.3,
+      "best": 0.75
+    },
+    "cv_recall_mean": {
+      "direction": "maximize",
+      "weight": 0.1,
+      "worst": 0.3,
+      "best": 0.85
+    },
+    "fit_seconds": {
+      "direction": "minimize",
+      "weight": 0.05,
+      "worst": 15.0,
+      "best": 0.01
+    },
+    "cv_f1_std": {
+      "direction": "minimize",
+      "weight": 0.1,
+      "worst": 0.2,
+      "best": 0.01
+    }
+  }
+}

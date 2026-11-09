@@ -1,0 +1,57 @@
+{
+  "protocol": {
+    "test_size": 0.2,
+    "seed": 42,
+    "cv_splits": 5,
+    "cv_seed": 42,
+    "fixed_threshold": 0.45,
+    "batch_size": 256,
+    "warmup_calls": 7,
+    "timed_calls": 40,
+    "fit_repeats": 3,
+    "primary_scenario": "realtime_cpu_service",
+    "positive_class": 1,
+    "positive_class_name": "hill",
+    "negative_class_name": "valley"
+  },
+  "scenarios": [
+    {
+      "name": "realtime_cpu_service",
+      "description": "Навчальний сценарій синхронного CPU-сервісу з пріоритетом Recall та малих ресурсних витрат.",
+      "constraints": {
+        "cv_recall_mean": {"min": 0.35},
+        "latency_p95_ms": {"max": 20.0},
+        "model_size_mb": {"max": 2.0}
+      },
+      "criteria": {
+        "cv_f1_mean": {"direction": "maximize", "weight": 0.25, "worst": 0.30, "best": 0.75},
+        "cv_recall_mean": {"direction": "maximize", "weight": 0.30, "worst": 0.30, "best": 0.85},
+        "latency_p95_ms": {"direction": "minimize", "weight": 0.20, "worst": 20.0, "best": 0.5},
+        "model_size_mb": {"direction": "minimize", "weight": 0.15, "worst": 2.0, "best": 0.005},
+        "cv_f1_std": {"direction": "minimize", "weight": 0.10, "worst": 0.20, "best": 0.01}
+      }
+    },
+    {
+      "name": "batch_quality_priority",
+      "description": "Навчальний пакетний сценарій із вищою вагою ROC-AUC та якості прогнозу.",
+      "constraints": {
+        "cv_f1_mean": {"min": 0.30},
+        "cv_recall_mean": {"min": 0.30},
+        "latency_p95_ms": {"max": 100.0},
+        "model_size_mb": {"max": 10.0}
+      },
+      "criteria": {
+        "cv_roc_auc_mean": {"direction": "maximize", "weight": 0.45, "worst": 0.50, "best": 0.95},
+        "cv_f1_mean": {"direction": "maximize", "weight": 0.30, "worst": 0.30, "best": 0.75},
+        "cv_recall_mean": {"direction": "maximize", "weight": 0.10, "worst": 0.30, "best": 0.85},
+        "fit_seconds": {"direction": "minimize", "weight": 0.05, "worst": 15.0, "best": 0.01},
+        "cv_f1_std": {"direction": "minimize", "weight": 0.10, "worst": 0.20, "best": 0.01}
+      }
+    }
+  ],
+  "sensitivity": {
+    "scenario": "batch_quality_priority",
+    "criterion": "cv_roc_auc_mean",
+    "weights": [0.10, 0.125, 0.15, 0.175, 0.20, 0.225, 0.25, 0.275, 0.30, 0.325, 0.35, 0.375, 0.40, 0.425, 0.45, 0.475, 0.50, 0.525, 0.55, 0.575, 0.60, 0.625, 0.65, 0.675, 0.70]
+  }
+}

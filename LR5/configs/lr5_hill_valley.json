@@ -1,0 +1,18 @@
+{
+  "seed": 42,
+  "test_size": 0.2,
+  "pca_thresholds": [0.85, 0.9, 0.95],
+  "working_pca_threshold": 0.9,
+  "k_values": [2, 3, 4, 5, 6, 7, 8],
+  "cluster_seeds": [11, 23, 42, 57, 81],
+  "kmeans_n_init": 10,
+  "isolation_forest": {
+    "n_estimators": 300,
+    "max_samples": "auto",
+    "max_features": 1.0
+  },
+  "anomaly_quantile": 0.95,
+  "controlled_anomaly_fraction": 1.0,
+  "controlled_anomaly_kinds": ["gaussian_noise", "local_spike", "segment_reverse"],
+  "top_k_fraction": 0.05
+}

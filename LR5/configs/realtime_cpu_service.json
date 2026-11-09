@@ -1,0 +1,47 @@
+{
+  "name": "realtime_cpu_service",
+  "description": "Навчальний сценарій синхронного CPU-сервісу з пріоритетом Recall та малих ресурсних витрат.",
+  "constraints": {
+    "cv_recall_mean": {
+      "min": 0.35
+    },
+    "latency_p95_ms": {
+      "max": 20.0
+    },
+    "model_size_mb": {
+      "max": 2.0
+    }
+  },
+  "criteria": {
+    "cv_f1_mean": {
+      "direction": "maximize",
+      "weight": 0.25,
+      "worst": 0.3,
+      "best": 0.75
+    },
+    "cv_recall_mean": {
+      "direction": "maximize",
+      "weight": 0.3,
+      "worst": 0.3,
+      "best": 0.85
+    },
+    "latency_p95_ms": {
+      "direction": "minimize",
+      "weight": 0.2,
+      "worst": 20.0,
+      "best": 0.5
+    },
+    "model_size_mb": {
+      "direction": "minimize",
+      "weight": 0.15,
+      "worst": 2.0,
+      "best": 0.005
+    },
+    "cv_f1_std": {
+      "direction": "minimize",
+      "weight": 0.1,
+      "worst": 0.2,
+      "best": 0.01
+    }
+  }
+}
